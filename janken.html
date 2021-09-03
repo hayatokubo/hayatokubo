@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>ジャンケンゲーム</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ result }}</h1>
+        <!--敵の手-->
+        <div>
+            {{ guide }}
+        </div>
+        <!--自分の手-->
+        <button @click="fight('a')">グー</button>
+        <button @click="fight('b')">チョキ</button>
+        <button @click="fight('c')">パー</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data:{
+                hand: ['a', 'b', 'c'],
+                guide: '結果が上に表示されるよ',
+                enemyHand: '',
+                result: 'いざ勝負！'
+               },
+            methods: {
+                fight: function(myHand){
+                    //敵の手をランダムに生成
+                    var index = Math.floor(Math.random() * Math.floor(3))
+                    var enemyHand = this.hand[index]
+
+                    //引き分け
+                    if(myHand == enemyHand){
+                        console.log('あいこ')
+                        this.result = 'あいこ'
+                    }
+
+                    //勝ち
+                    if(myHand == 'a' && enemyHand == 'b'){
+                        console.log('勝ち')
+                        this.result = '勝ち'
+                    }
+
+                    if(myHand == 'b' && enemyHand == 'c'){
+                        console.log('勝ち')
+                        this.result = '勝ち'
+                    }
+
+                    if(myHand == 'c' && enemyHand == 'a'){
+                        console.log('勝ち')
+                        this.result = '勝ち'
+                    }
+
+                    //負け
+                    if(myHand == 'b' && enemyHand == 'a'){
+                        console.log('負け')
+                        this.result = '負け'
+                    }
+
+                    if(myHand == 'c' && enemyHand == 'b'){
+                        console.log('負け')
+                        this.result = '負け'
+                    }
+
+                    if(myHand == 'a' && enemyHand == 'c'){
+                        console.log('負け')
+                        this.result = '負け'
+                    }
+
+                }
+            }
+        });
+    </script>
+</body>
+</html>
